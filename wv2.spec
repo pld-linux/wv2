@@ -1,13 +1,13 @@
 Summary:	MS Word Document reading library
 Summary(pl):	Biblioteka czytaj±ca dokumenty MS Worda
 Name:		wv2
-Version:	0.1.7
+Version:	0.1.8
 Release:	1
 License:	LGPL
 Group:		Libraries
 Vendor:		Caolan McNamara <Caolan.McNamara@ul.ie>
 Source0:	http://dl.sourceforge.net/wvware/%{name}-%{version}.tar.bz2
-# Source0-md5:	5fb8bcaf8dcc20add557dcb7a537b423
+# Source0-md5:	2935f0d553fbe391d045b738c3f8aec3
 Patch0:		%{name}-link.patch
 URL:		http://wvware.sourceforge.net/
 BuildRequires:	autoconf
