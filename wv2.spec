@@ -1,7 +1,7 @@
 Summary:	MS Word Document reading library
 Summary(pl):	Biblioteka czytaj±ca dokumenty MS Worda
 Name:		wv2
-Version:	0.0.8
+Version:	0.0.9
 Release:	1
 License:	LGPL
 Group:		Libraries
