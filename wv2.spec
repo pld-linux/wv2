@@ -6,7 +6,7 @@ Release:	1
 License:	LGPL
 Group:		Libraries
 Vendor:		Caolan McNamara <Caolan.McNamara@ul.ie>
-Source0:	http://prdownloads.sourceforge.net/wvware/%{name}-%{version}.tar.bz2
+Source0:	http://dl.sourceforge.net/wvware/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-link.patch
 URL:		http://www.wvWare.com/
 BuildRequires:	autoconf
