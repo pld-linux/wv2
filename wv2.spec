@@ -1,17 +1,18 @@
 Summary:	MS Word Document reading library
 Summary(pl):	Biblioteka czytaj±ca dokumenty MS Worda
 Name:		wv2
-Version:	0.1
+Version:	0.1.7
 Release:	1
 License:	LGPL
 Group:		Libraries
 Vendor:		Caolan McNamara <Caolan.McNamara@ul.ie>
 Source0:	http://dl.sourceforge.net/wvware/%{name}-%{version}.tar.bz2
-# Source0-md5:	2e6f97a75ab2be57f0d6c18e2ebee4f5
+# Source0-md5:	5fb8bcaf8dcc20add557dcb7a537b423
 Patch0:		%{name}-link.patch
 URL:		http://wvware.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	bzip2-devel
 BuildRequires:	glib2-devel
 BuildRequires:	libgsf-devel >= 1.7.2
 BuildRequires:	libstdc++-devel
@@ -61,9 +62,11 @@ Pakiet zawiera statyczn± bibliotekê wv2.
 find . -type d -name 'CVS'| xargs rm -rf
 
 %build
+rm -f missing
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure \
 	--with-glib \
