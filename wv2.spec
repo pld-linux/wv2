@@ -1,19 +1,16 @@
 Summary:	MS Word Document reading library
 Summary(pl):	Biblioteka czytaj±ca dokumenty MS Worda
 Name:		wv2
-Version:	0.1.9
+Version:	0.2.1
 Release:	1
 License:	LGPL
 Group:		Libraries
 Vendor:		Caolan McNamara <Caolan.McNamara@ul.ie>
 Source0:	http://dl.sourceforge.net/wvware/%{name}-%{version}.tar.bz2
-# Source0-md5:	7abf6dc4e59ad9982b787d7ab1d745da
-Patch0:		%{name}-link.patch
+# Source0-md5:	34c1a712bdd0ee288fa7bc5e3a111fe7
 URL:		http://wvware.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	bzip2-devel
-BuildRequires:	glib2-devel
 BuildRequires:	libgsf-devel >= 1.7.2
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.4d-3
@@ -61,15 +58,18 @@ Pakiet zawiera statyczn± bibliotekê wv2.
 # Checking for CVS specific files and removing them.
 find . -type d -name 'CVS'| xargs rm -rf
 
+# it caused stupid ac error message
+rm -rf autom4te.cache
+
 %build
+# supplied libtool doesn't have C++ support
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__autoheader}
 %{__automake}
 %configure \
-	--with-glib \
-	--with-libole2 \
+	%{?debug:--enable-debug} \
 	--enable-static
 
 %{__make}
@@ -88,7 +88,7 @@ rm -fr $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS THANKS TODO
+%doc AUTHORS ChangeLog THANKS TODO
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
