@@ -1,12 +1,12 @@
 Summary:	MS Word Document reading library
 Summary(pl):	Biblioteka czytaj±ca dokumenty MS Worda
 Name:		wv2
-Version:	0.0.5
+Version:	0.0.8
 Release:	1
 License:	LGPL
 Group:		Libraries
 Vendor:		Caolan McNamara <Caolan.McNamara@ul.ie>
-Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/wvware/%{name}-%{version}.tar.bz2
+Source0:	http://prdownloads.sourceforge.net/wvware/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-link.patch
 URL:		http://www.wvWare.com/
 BuildRequires:	autoconf
@@ -51,8 +51,7 @@ Contains static wv2 library.
 Pakiet zawiera statyczn± bibliotekê wv2.
 
 %prep
-%setup -q -n %{name}
-%patch -p1
+%setup -q
 
 # Checking for CVS specific files and removing them.
 find . -type d -name 'CVS'| xargs rm -rf
