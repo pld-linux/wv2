@@ -31,6 +31,8 @@ Summary:	Include files needed to compile
 Summary(pl):	Pliki nag³ówkowe do biblioteki wv2
 Group:		Development/Libraries
 Requires:	%{name} = %{version}
+Requires:	libgsf-devel
+Requires:	libstdc++-devel
 
 %description devel
 Contains the wv2 header files.
