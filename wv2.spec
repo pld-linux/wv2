@@ -11,10 +11,11 @@ Patch0:		%{name}-link.patch
 URL:		http://www.wvWare.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	glib-devel
-BuildRequires:	libole2-devel
+BuildRequires:	glib2-devel
+BuildRequires:	libgsf-devel >= 1.7.2
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.4d-3
+BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
