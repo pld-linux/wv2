@@ -8,6 +8,7 @@ Group:		Libraries
 Vendor:		Caolan McNamara <Caolan.McNamara@ul.ie>
 Source0:	http://dl.sourceforge.net/wvware/%{name}-%{version}.tar.bz2
 # Source0-md5:	34c1a712bdd0ee288fa7bc5e3a111fe7
+Patch0:		%{name}-gcc34.patch
 URL:		http://wvware.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -54,6 +55,7 @@ Pakiet zawiera statyczn± bibliotekê wv2.
 
 %prep
 %setup -q
+%patch0 -p1
 
 # Checking for CVS specific files and removing them.
 find . -type d -name 'CVS'| xargs rm -rf
