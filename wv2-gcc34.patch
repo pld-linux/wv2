@@ -1,0 +1,86 @@
+--- wv2-0.2.1/src/wvlog.h.orig	2003-11-05 20:21:02.000000000 +0100
++++ wv2-0.2.1/src/wvlog.h	2004-05-09 17:09:42.430688864 +0200
+@@ -38,7 +38,7 @@
+         const wvdebugstream& operator<<( ios (*__pf)( ios& ) ) const { std::cerr << __pf; return *this; }
+ #else
+         const wvdebugstream& operator<<( std::basic_ostream<char>& (*__pf)( std::basic_ostream<char>& ) ) const { std::cerr << __pf; return *this; }
+-        const wvdebugstream& operator<<( std::ios<char> (*__pf)( std::ios<char>& ) ) const { std::cerr << __pf; return *this; }
++        const wvdebugstream& operator<<( std::ios (*__pf)( std::ios& ) ) const { std::cerr << __pf; return *this; }
+         const wvdebugstream& operator<<( std::ios_base& (*__pf) ( std::ios_base& ) ) const { std::cerr << __pf; return *this; }
+ #endif
+         const wvdebugstream& operator<<( long l ) const { std::cerr << l; return *this; }
+@@ -72,7 +72,7 @@
+         const wvnodebugstream& operator<<( ios (*__pf)( ios& ) ) const { std::cerr << __pf; return *this; }
+ #else
+         const wvnodebugstream& operator<<( std::basic_ostream<char>& (*__pf)( std::basic_ostream<char>& ) ) const { return *this; }
+-        const wvnodebugstream& operator<<( std::ios<char> (*__pf)( std::ios<char>& ) ) const { return *this; }
++        const wvnodebugstream& operator<<( std::ios (*__pf)( std::ios& ) ) const { return *this; }
+         const wvnodebugstream& operator<<( std::ios_base& (*__pf) ( std::ios_base& ) ) const { return *this; }
+ #endif
+         const wvnodebugstream& operator<<( long ) const { return *this; }
+--- wv2-0.2.1/src/properties97.cpp.orig	2003-09-29 14:45:03.000000000 +0200
++++ wv2-0.2.1/src/properties97.cpp	2004-05-09 18:05:18.717496176 +0200
+@@ -79,7 +79,10 @@
+         if ( m_version == Word8 )
+             m_plcfbtePapx = new PLCF<Word97::BTE>( fib.lcbPlcfbtePapx, m_table );
+         else
+-            m_plcfbtePapx = convertPLCF<Word95::BTE, Word97::BTE>( PLCF<Word95::BTE>( fib.lcbPlcfbtePapx, m_table ) );
++	{
++	    const PLCF<Word95::BTE> tmp(fib.lcbPlcfbtePapx, m_table);
++            m_plcfbtePapx = convertPLCF<Word95::BTE, Word97::BTE>(tmp);
++	}
+         if ( fib.cpnBtePap != 0 && fib.cpnBtePap != m_plcfbtePapx->count() )
+             wvlog << "Error: The PAP piece table is incomplete! (Should be " << fib.cpnBtePap << ")" << std::endl;
+ 
+@@ -87,19 +90,24 @@
+         if ( m_version == Word8 )
+             m_plcfbteChpx = new PLCF<Word97::BTE>( fib.lcbPlcfbteChpx, m_table );
+         else
+-            m_plcfbteChpx = convertPLCF<Word95::BTE, Word97::BTE>( PLCF<Word95::BTE>( fib.lcbPlcfbteChpx, m_table ) );
++	{
++            const PLCF<Word95::BTE> tmp(fib.lcbPlcfbteChpx, m_table);
++            m_plcfbteChpx = convertPLCF<Word95::BTE, Word97::BTE>(tmp);
++	}
+         if ( fib.cpnBteChp != 0 && fib.cpnBteChp != m_plcfbteChpx->count() )
+             wvlog << "Error: The CHP piece table is incomplete! (Should be " << fib.cpnBteChp << ")" << std::endl;
+     }
+     else {
+         // Read the PAPX and CHPX BTE PLCFs (to locate the appropriate FKPs) from a non-complex file
+         m_table->seek( fib.fcPlcfbtePapx );
+-        m_plcfbtePapx = convertPLCF<Word95::BTE, Word97::BTE>( PLCF<Word95::BTE>( fib.lcbPlcfbtePapx, m_table ) );
++	PLCF<Word95::BTE> tmp1(fib.lcbPlcfbtePapx, m_table);
++        m_plcfbtePapx = convertPLCF<Word95::BTE, Word97::BTE>(tmp1);
+         if ( fib.cpnBtePap != m_plcfbtePapx->count() )
+             fillBinTable( m_plcfbtePapx, fib.cpnBtePap );
+ 
+         m_table->seek( fib.fcPlcfbteChpx );
+-        m_plcfbteChpx = convertPLCF<Word95::BTE, Word97::BTE>( PLCF<Word95::BTE>( fib.lcbPlcfbteChpx, m_table ) );
++	PLCF<Word95::BTE> tmp2(fib.lcbPlcfbteChpx, m_table);
++        m_plcfbteChpx = convertPLCF<Word95::BTE, Word97::BTE>(tmp2);
+         if ( fib.cpnBteChp != m_plcfbteChpx->count() )
+             fillBinTable( m_plcfbteChpx, fib.cpnBteChp );
+     }
+@@ -194,7 +202,10 @@
+         if ( m_version == Word8 )
+             m_papxFkp = new PAPXFKP_t( m_wordDocument, false );
+         else
+-            m_papxFkp = convertFKP( PAPXFKP95_t( m_wordDocument, false ) );
++	{
++	    const PAPXFKP95_t tmp(m_wordDocument, false);
++            m_papxFkp = convertFKP(tmp);
++	}
+         m_wordDocument->pop();
+     }
+ 
+@@ -249,7 +260,10 @@
+         if ( m_version == Word8 )
+             m_papxFkp = new PAPXFKP_t( m_wordDocument, false );
+         else
+-            m_papxFkp = convertFKP( PAPXFKP95_t( m_wordDocument, false ) );
++	{
++	    const PAPXFKP95_t tmp(m_wordDocument, false);
++            m_papxFkp = convertFKP(tmp);
++	}
+         m_wordDocument->pop();
+     }
+ 
