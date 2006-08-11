@@ -1,3 +1,6 @@
+#
+# http://www.securityfocus.com/bid/18751/info
+# 
 Summary:	MS Word Document reading library
 Summary(pl):	Biblioteka czytaj±ca dokumenty MS Worda
 Name:		wv2
