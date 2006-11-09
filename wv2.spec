@@ -1,6 +1,6 @@
 #
 # http://www.securityfocus.com/bid/18751/info
-# 
+#
 Summary:	MS Word Document reading library
 Summary(pl):	Biblioteka czytaj±ca dokumenty MS Worda
 Name:		wv2
@@ -20,8 +20,8 @@ BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-wv2 is a library that understands the Microsoft Word 8 binary
-file format (Office97, Office2000).
+wv2 is a library that understands the Microsoft Word 8 binary file
+format (Office97, Office2000).
 
 %description -l pl
 wv2 jest bibliotek±, któr± rozumie binarne dokumenty programu
@@ -31,7 +31,7 @@ Microsoft Word 8 (Office97, Office2000).
 Summary:	Include files needed to compile
 Summary(pl):	Pliki nag³ówkowe do biblioteki wv2
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Requires:	libgsf-devel
 Requires:	libstdc++-devel
 
@@ -46,7 +46,7 @@ Summary:	Static wv2 library
 Summary(pl):	Biblioteka statyczna wv2
 Summary(pt_BR):	Bibliotecas estáticas para desenvolvimento com o wv
 Group:		Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Contains static wv2 library.
