@@ -2,7 +2,7 @@
 # http://www.securityfocus.com/bid/18751/info
 #
 Summary:	MS Word Document reading library
-Summary(pl):	Biblioteka czytaj±ca dokumenty MS Worda
+Summary(pl.UTF-8):   Biblioteka czytajÄ…ca dokumenty MS Worda
 Name:		wv2
 Version:	0.2.3
 Release:	2
@@ -23,13 +23,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 wv2 is a library that understands the Microsoft Word 8 binary file
 format (Office97, Office2000).
 
-%description -l pl
-wv2 jest bibliotek±, któr± rozumie binarne dokumenty programu
+%description -l pl.UTF-8
+wv2 jest bibliotekÄ…, ktÃ³rÄ… rozumie binarne dokumenty programu
 Microsoft Word 8 (Office97, Office2000).
 
 %package devel
 Summary:	Include files needed to compile
-Summary(pl):	Pliki nag³ówkowe do biblioteki wv2
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe do biblioteki wv2
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libgsf-devel
@@ -38,21 +38,21 @@ Requires:	libstdc++-devel
 %description devel
 Contains the wv2 header files.
 
-%description devel -l pl
-Pakiet tem zawiera pliki nag³ówkowe wv2.
+%description devel -l pl.UTF-8
+Pakiet tem zawiera pliki nagÅ‚Ã³wkowe wv2.
 
 %package static
 Summary:	Static wv2 library
-Summary(pl):	Biblioteka statyczna wv2
-Summary(pt_BR):	Bibliotecas estáticas para desenvolvimento com o wv
+Summary(pl.UTF-8):   Biblioteka statyczna wv2
+Summary(pt_BR.UTF-8):   Bibliotecas estÃ¡ticas para desenvolvimento com o wv
 Group:		Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Contains static wv2 library.
 
-%description static -l pl
-Pakiet zawiera statyczn± bibliotekê wv2.
+%description static -l pl.UTF-8
+Pakiet zawiera statycznÄ… bibliotekÄ™ wv2.
 
 %prep
 %setup -q
