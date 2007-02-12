@@ -2,7 +2,7 @@
 # http://www.securityfocus.com/bid/18751/info
 #
 Summary:	MS Word Document reading library
-Summary(pl.UTF-8):   Biblioteka czytająca dokumenty MS Worda
+Summary(pl.UTF-8):	Biblioteka czytająca dokumenty MS Worda
 Name:		wv2
 Version:	0.2.3
 Release:	2
@@ -29,7 +29,7 @@ Microsoft Word 8 (Office97, Office2000).
 
 %package devel
 Summary:	Include files needed to compile
-Summary(pl.UTF-8):   Pliki nagłówkowe do biblioteki wv2
+Summary(pl.UTF-8):	Pliki nagłówkowe do biblioteki wv2
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libgsf-devel
@@ -43,8 +43,8 @@ Pakiet tem zawiera pliki nagłówkowe wv2.
 
 %package static
 Summary:	Static wv2 library
-Summary(pl.UTF-8):   Biblioteka statyczna wv2
-Summary(pt_BR.UTF-8):   Bibliotecas estáticas para desenvolvimento com o wv
+Summary(pl.UTF-8):	Biblioteka statyczna wv2
+Summary(pt_BR.UTF-8):	Bibliotecas estáticas para desenvolvimento com o wv
 Group:		Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
