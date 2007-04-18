@@ -5,7 +5,7 @@ Summary:	MS Word Document reading library
 Summary(pl.UTF-8):	Biblioteka czytająca dokumenty MS Worda
 Name:		wv2
 Version:	0.2.3
-Release:	2
+Release:	3
 License:	LGPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/wvware/%{name}-%{version}.tar.bz2
