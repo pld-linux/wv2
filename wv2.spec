@@ -13,6 +13,8 @@ Source0:	http://dl.sourceforge.net/wvware/%{name}-%{version}.tar.bz2
 URL:		http://wvware.sourceforge.net/
 BuildRequires:	cmake >= 2.6.1-2
 BuildRequires:	libgsf-devel >= 1.7.2
+BuildRequires:	libstdc++-devel
+BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
