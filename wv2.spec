@@ -4,19 +4,15 @@
 Summary:	MS Word Document reading library
 Summary(pl.UTF-8):	Biblioteka czytająca dokumenty MS Worda
 Name:		wv2
-Version:	0.3.1
+Version:	0.4.1
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/wvware/%{name}-%{version}.tar.bz2
-# Source0-md5:	4a20200141cb1299055f2bf13b56989d
+# Source0-md5:	7565fcc392c8869c44a301992b3ea561
 URL:		http://wvware.sourceforge.net/
-BuildRequires:	autoconf
-BuildRequires:	automake
+BuildRequires:	cmake >= 2.6.1-2
 BuildRequires:	libgsf-devel >= 1.7.2
-BuildRequires:	libstdc++-devel
-BuildRequires:	libtool >= 2:1.4d-3
-BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -33,26 +29,13 @@ Summary(pl.UTF-8):	Pliki nagłówkowe do biblioteki wv2
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libgsf-devel
-Requires:	libstdc++-devel
+Obsoletes:	wv2-static
 
 %description devel
 Contains the wv2 header files.
 
 %description devel -l pl.UTF-8
 Pakiet tem zawiera pliki nagłówkowe wv2.
-
-%package static
-Summary:	Static wv2 library
-Summary(pl.UTF-8):	Biblioteka statyczna wv2
-Summary(pt_BR.UTF-8):	Bibliotecas estáticas para desenvolvimento com o wv
-Group:		Libraries
-Requires:	%{name}-devel = %{version}-%{release}
-
-%description static
-Contains static wv2 library.
-
-%description static -l pl.UTF-8
-Pakiet zawiera statyczną bibliotekę wv2.
 
 %prep
 %setup -q
@@ -61,22 +44,21 @@ Pakiet zawiera statyczną bibliotekę wv2.
 rm -rf autom4te.cache
 
 %build
-# supplied libtool doesn't have C++ support
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%configure \
-	%{?debug:--enable-debug} \
-	--enable-static
+install -d build
+cd build
+%cmake .. \
+	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
+	-DCMAKE_BUILD_TYPE=%{!?debug:Release}%{?debug:Debug} \
+%if "%{_lib}" == "lib64"
+	-DLIB_SUFFIX=64
+%endif
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
+%{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
@@ -88,16 +70,14 @@ rm -fr $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog THANKS TODO
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/libwv2.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libwv2.so.?
 
 %files devel
 %defattr(644,root,root,755)
 %doc doc/escher/*.html doc/DESIGN.html src/generator/{*.htm,spec_defects}
 %attr(755,root,root) %{_bindir}/wv2-config
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
+%attr(755,root,root) %{_libdir}/libwv2.so
+%{_libdir}/libwv2.la
 %{_includedir}/wv2
-
-%files static
-%defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/wvWare
