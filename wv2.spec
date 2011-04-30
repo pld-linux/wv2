@@ -6,10 +6,11 @@ Summary(pl.UTF-8):	Biblioteka czytająca dokumenty MS Worda
 Name:		wv2
 Version:	0.4.2
 Release:	1
-License:	LGPL
+License:	LGPL v2
 Group:		Libraries
-Source0:	http://dl.sourceforge.net/wvware/%{name}-%{version}.tar.bz2
+Source0:	http://downloads.sourceforge.net/wvware/%{name}-%{version}.tar.bz2
 # Source0-md5:	850ed8e44a84e7bf0610747827018cbc
+Patch0:		%{name}-link.patch
 URL:		http://wvware.sourceforge.net/
 BuildRequires:	cmake >= 2.6.1-2
 BuildRequires:	libgsf-devel >= 1.7.2
@@ -41,9 +42,7 @@ Pakiet tem zawiera pliki nagłówkowe wv2.
 
 %prep
 %setup -q
-
-# it caused stupid ac error message
-rm -rf autom4te.cache
+%patch0 -p1
 
 %build
 install -d build
@@ -73,7 +72,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog THANKS TODO
 %attr(755,root,root) %{_libdir}/libwv2.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libwv2.so.?
+%attr(755,root,root) %ghost %{_libdir}/libwv2.so.4
 
 %files devel
 %defattr(644,root,root,755)
