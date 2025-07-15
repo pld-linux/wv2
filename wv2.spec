@@ -42,7 +42,7 @@ Pakiet tem zawiera pliki nagłówkowe wv2.
 
 %prep
 %setup -q
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 install -d build
